@@ -1,0 +1,26 @@
+{
+  "name": "auto-completion",
+  "version": "0.0.1",
+  "description": "search string auto completion",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yvour/auto-completion.git"
+  },
+  "keywords": [
+    "autocompletion",
+    "search",
+    "reactjs",
+    "react",
+    "javascript"
+  ],
+  "author": "Ivan V. Urvanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yvour/auto-completion/issues"
+  },
+  "homepage": "https://github.com/Yvour/auto-completion#readme"
+}
