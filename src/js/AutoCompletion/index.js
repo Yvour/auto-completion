@@ -9,11 +9,11 @@ class AutoCompletion extends React.Component {
   constructor() {
     super();
     this.state = {
-      count: 0,
-      lastSent: (new Date()).valueOf(),
-      results: NO_RESULTS,
-      search: "",
-      
+      count: 0
+      , lastSent: (new Date()).valueOf()
+      , results: NO_RESULTS
+      , search: "",
+
     };
   }
 
@@ -21,7 +21,9 @@ class AutoCompletion extends React.Component {
     const search = this.state.search;
     const timeDifference = (new Date()).valueOf() - this.state.lastSent
     if (timeDifference > SEND_INTERVAL) {
-      this.setState(Object.assign( this.state, {lastSent: (new Date()).valueOf()}));
+      this.setState(Object.assign(this.state, {
+        lastSent: (new Date()).valueOf()
+      }));
       fetch(`query/${search}`)
 
         .then(response => response.json())
