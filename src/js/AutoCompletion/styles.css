@@ -1,0 +1,20 @@
+
+
+div {
+  border: 1px solid blue;
+}
+
+.search-result-container {
+  display: flex;
+  position: absolute;
+  z-index: 20;
+  flex-direction: column;
+  background-color: bisque;
+}
+
+.search-result-item{
+ background: azure;
+ padding: 5px;
+ border-radius: 5px;
+ margin: 2px;
+}

@@ -5,9 +5,9 @@
   "main": "src/js/index.js",
   "scripts": {
     "test": "test.js",
-      "compile": "webpack",
+    "compile": "webpack",
     "build": "webpack -p",
-"start": "node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -26,20 +26,19 @@
     "url": "https://github.com/Yvour/auto-completion/issues"
   },
   "homepage": "https://github.com/Yvour/auto-completion#readme",
-
-
-"dependencies": {
- 
-     "babel-core": "^6.26.0",
+  "dependencies": {
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "body-parser": "~1.0.1",
+    "css-loader": "^0.28.11",
     "express": "^4.16.2",
+    "node-fetch": "^2.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "style-loader": "^0.21.0",
     "webpack": "^3.9.1",
-"webpack-dev-middleware": "^1.12.2"
- 
-  
-}
+    "webpack-dev-middleware": "^1.12.2"
+  }
 }
