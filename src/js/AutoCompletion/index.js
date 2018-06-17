@@ -1,68 +1,74 @@
 import React from 'react';
-import  "./styles.css";
+import "./styles.css";
 
 const NO_RESULTS = [];
+const SEND_INTERVAL = 5000;
 
 
 class AutoCompletion extends React.Component {
-    constructor() {
-      super();
-      this.state = {
-        count: 0,
-        lastSend: (new Date()).valueOf(),
-        results: NO_RESULTS
-      };
-    }
+  constructor() {
+    super();
+    this.state = {
+      count: 0,
+      lastSent: (new Date()).valueOf(),
+      results: NO_RESULTS,
+      search: "",
+      
+    };
+  }
 
-    getSearchResult(search) {
+  getSearchResult() {
+    const search = this.state.search;
+    const timeDifference = (new Date()).valueOf() - this.state.lastSent
+    if (timeDifference > SEND_INTERVAL) {
+      this.setState(Object.assign( this.state, {lastSent: (new Date()).valueOf()}));
       fetch(`query/${search}`)
-        
-      .then(response=>response.json())
-      .then(result => {
-        console.log(result);
-   console.log(this.state);
-console.log('setting state');
-        this.setState(Object.assign(this.state, {
-          results: result
-        }));
-      })
 
-    }
+        .then(response => response.json())
+        .then(result => {
 
+          this.setState(Object.assign(this.state, {
+            results: result
+          }));
+        })
+    } else
+      setTimeout(this.getSearchResult.bind(this), SEND_INTERVAL - timeDifference)
+  }
 
-    renderSearchResult(arr) {
-console.log('render');
-console.log(arr);
-      if (!Array.isArray(arr)) return null
-      else return (<div className="search-result-container">
-{arr.map((x, i) =>
-        (<div key={i} className = "search-result-item" > {x} </div>))}
-    </div>
-);
-      }
-
-
-      render() {
-        return ( <div onClick = {
-            () => {
-              this.setState({
-                count: this.state.count + 1
-              });
-            }
-          } >
-          AutoComplete: {   this.state.count     } 
-            <input onChange = {
+  renderSearchInput() {
+    return <input onChange = {
             e => {
-              const value = e.target.value
-              if (value && value.length)
-              this.getSearchResult(e.target.value);
-              else this.setState(Object.assign(this.state, {results: NO_RESULTS}))
+              const value = e.target.value;
+              this.setState(Object.assign(this.state, {
+                 search: value,
+                 results: (value && value.length ? this.state.results : NO_RESULTS)
+                }));
+              if (value && value.length){
+              this.getSearchResult();
+              }
+              
             }
           }
-          />
-    {this.renderSearchResult(this.state.results)}
-   </div>
-        );
-      }
-    }
-    export default AutoCompletion;
+          />;
+  }
+
+
+  renderSearchResult() {
+    const arr = this.state.results || NO_RESULTS;
+
+    if (!Array.isArray(arr)) return null
+    else return (<div className="search-result-container">
+{arr.map((x, i) =>
+        (<div key={i} className = "search-result-item" > {x} </div>))}
+    </div>);
+  }
+
+
+  render() {
+    return (<div>
+            {this.renderSearchInput()}
+    {this.renderSearchResult()}
+   </div>);
+  }
+}
+export default AutoCompletion;
