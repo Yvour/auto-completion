@@ -1,7 +1,8 @@
 
 
-div {
-  border: 1px solid blue;
+.search-input{
+  width:50%;
+  border: 1px solid lightblue;
 }
 
 .search-result-container {
@@ -9,12 +10,13 @@ div {
   position: absolute;
   z-index: 20;
   flex-direction: column;
-  background-color: bisque;
+  background-color: transparent;
+  border: 1px solid cian;
 }
 
 .search-result-item{
  background: azure;
  padding: 5px;
  border-radius: 5px;
- margin: 2px;
+ margin: 1px;
 }

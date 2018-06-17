@@ -2,7 +2,7 @@ import React from 'react';
 import "./styles.css";
 
 const NO_RESULTS = [];
-const SEND_INTERVAL = 5000;
+const SEND_INTERVAL = 500;
 
 
 class AutoCompletion extends React.Component {
@@ -10,19 +10,22 @@ class AutoCompletion extends React.Component {
     super();
     this.state = {
       count: 0
-      , lastSent: (new Date()).valueOf()
+      , lastSent: (new Date())
+        .valueOf()
       , results: NO_RESULTS
-      , search: "",
+      , search: ""
 
     };
   }
 
   getSearchResult() {
     const search = this.state.search;
-    const timeDifference = (new Date()).valueOf() - this.state.lastSent
+    const timeDifference = (new Date())
+      .valueOf() - this.state.lastSent
     if (timeDifference > SEND_INTERVAL) {
       this.setState(Object.assign(this.state, {
-        lastSent: (new Date()).valueOf()
+        lastSent: (new Date())
+          .valueOf()
       }));
       fetch(`query/${search}`)
 
@@ -38,8 +41,10 @@ class AutoCompletion extends React.Component {
   }
 
   renderSearchInput() {
-    return <input onChange = {
-            e => {
+    return <input 
+             className='search-input'
+               placeholder="Enter string to search in Wikipeda..."  
+             onChange = {e => {
               const value = e.target.value;
               this.setState(Object.assign(this.state, {
                  search: value,
@@ -61,7 +66,9 @@ class AutoCompletion extends React.Component {
     if (!Array.isArray(arr)) return null
     else return (<div className="search-result-container">
 {arr.map((x, i) =>
-        (<div key={i} className = "search-result-item" > {x} </div>))}
+        (<div key={i} className = "search-result-item"
+             onClick={()=>this.setState(Object.assign(this.state, {search:x}))}
+          > {x} </div>))}
     </div>);
   }
 
